@@ -2,15 +2,11 @@ pipeline {
     agent none
     stages {
         stage('Build Gateway') {
-            agent { dockerfile true }
-            when {
-                changeset "**/gateway/*.*"
-                beforeAgent true
-            }
+            agent {docker { image 'netflix-api-gateway' }}
             steps {
                 dir('gateway') {
-                  sh 'entrypoint.sh'
-                  sh '...'
+                sh 'entrypoint.sh'
+                sh '...'
                 }
             }
         }
