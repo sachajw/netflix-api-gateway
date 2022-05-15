@@ -1,0 +1,18 @@
+pipeline {
+    agent none
+    stages {
+        stage('Build Gateway') {
+            agent { dockerfile true }
+            when {
+                changeset "**/gateway/*.*"
+                beforeAgent true
+            }
+            steps {
+                dir('gateway') {
+                  sh 'entrypoint.sh'
+                  sh '...'
+                }
+            }
+        }
+    }
+}
